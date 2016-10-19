@@ -1,0 +1,153 @@
+<ion-view view-title="New Orders">
+
+   <div class="bar bar-header header_inner">
+        <button class="button button-icon fa fa-bars btn_nav" menu-toggle="left"></button>
+        <div class="h1 title">ALL</div>
+        <button class="button button-clear btn_logout fa fa-power-off" ng-click="logout()"></button>
+    </div>
+    
+    
+  <ion-content>
+   <ion-refresher on-refresh="doRefresh()" spinner="bubbles" style="color:#D12C37;">
+    </ion-refresher>
+    
+    <div class="content has-subheader" >
+        
+        <div class="table_wp table-mobile" >
+            <div class="row header">
+                <div class="col-33">
+                    Customer
+                </div>
+                <div class="col" style="text-align:center;">
+                    Type
+                </div>
+                <div class="col text-center">
+                    SRC
+                </div>
+                <div class="col text-center">
+                    MORE
+                </div>
+            </div>
+        
+            
+            <div class="row list_item"  ng-click="modalshow(orders.order_id)"  ng-repeat="orders in orderlist">
+                <div class="col-33 text_adjust">
+                    {{orders.first_name}} {{orders.last_name}}
+                </div>
+                <div class="col text_adjust">
+                    {{orders.order_type}}
+                </div>
+                <div class="col" ng-show="orders.source_type=='facebook'">
+                    <svg xml:space="preserve" enable-background="new 0 0 52 52" viewBox="0 0 52 52" height="52px" width="52px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1">
+                    <circle r="25.364" cy="26" cx="26" fill="#1C3749"/>
+                    <text font-size="20" font-family="'FontAwesome'" fill="#FFFFFF" transform="matrix(1 0 0 1 18.2852 34.2441)">&#xf09a;</text>
+                    </svg>
+                </div>
+                
+                <div class="col" ng-show="orders.source_type=='web'">
+                    <svg xml:space="preserve" enable-background="new 0 0 52 52" viewBox="0 0 52 52" height="52px" width="52px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1">
+                    <circle r="25.364" cy="26" cx="26" fill="#1C3749"/>
+                    <text font-size="20" font-family="'FontAwesome'" fill="#FFFFFF" transform="matrix(1 0 0 1 14.2852 34.2441)">&#xf109;</text>
+                    </svg>
+                </div>
+                
+                <div class="col" ng-show="orders.source_type=='app'">
+                    <svg xml:space="preserve" enable-background="new 0 0 52 52" viewBox="0 0 52 52" height="52px" width="52px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1">
+                    <circle r="25.364" cy="26" cx="26" fill="#1C3749"/>
+                    <text font-size="24" font-family="'FontAwesome'" fill="#FFFFFF" transform="matrix(1 0 0 1 20.2852 34.2441)">&#xf10b;</text>
+                    </svg>
+                </div>
+                
+                
+                <div class="col">
+                    <a class="more-btn" href="#"></a>
+                </div>
+            </div>
+            
+        
+    </div>
+    
+    
+            
+<table width="100%" border="0" class="table_wp table-tablet">
+  <tbody>
+    <tr>
+      <th scope="col">Customer</th>
+      <th scope="col">Status</th>
+      <th scope="col">Created</th>
+      <th scope="col">Expected</th>
+      <th scope="col">ID</th>
+      <th scope="col">TYPE</th>
+      <th scope="col">TOTAL</th>
+      <th scope="col" class="text-center">SRC</th>
+    </tr>
+    
+    
+    <tr ng-click="orderDetailmodal(orders.order_id)"  ng-repeat="orders in orderlist">
+        <td>
+        	{{orders.first_name}} {{orders.last_name}}
+        </td>
+        <td>
+        	{{orders.order_status}}
+        </td>
+        <td>
+        	{{orders.created_time}}
+        </td>
+        <td>
+        	{{orders.delivery_time}}
+        </td>
+        <td>
+        	{{orders.order_ref_id}}
+        </td>
+        <td>
+        	{{orders.order_type}}
+        </td>
+        <td>
+        	${{orders.total_amount}}
+        </td>
+        <td class="text-center">
+            
+            	<div ng-show="orders.source_type=='facebook'" style="padding-right:20px;">
+                    <svg xml:space="preserve" enable-background="new 0 0 52 52" viewBox="0 0 52 52" height="52px" width="52px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1">
+                    <circle r="25.364" cy="26" cx="26" fill="#1C3749"/>
+                    <text font-size="20" font-family="'FontAwesome'" fill="#FFFFFF" transform="matrix(1 0 0 1 18.2852 34.2441)">&#xf09a;</text>
+                    </svg>
+                </div>
+                
+                <div ng-show="orders.source_type=='web'" style="padding-right:20px;">
+                    <svg xml:space="preserve" enable-background="new 0 0 52 52" viewBox="0 0 52 52" height="52px" width="52px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1">
+                    <circle r="25.364" cy="26" cx="26" fill="#1C3749"/>
+                    <text font-size="20" font-family="'FontAwesome'" fill="#FFFFFF" transform="matrix(1 0 0 1 14.2852 34.2441)">&#xf109;</text>
+                    </svg>
+                </div>
+                
+                <div ng-show="orders.source_type=='app'" style="padding-right:20px;">
+                    <svg xml:space="preserve" enable-background="new 0 0 52 52" viewBox="0 0 52 52" height="52px" width="52px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1">
+                    <circle r="25.364" cy="26" cx="26" fill="#1C3749"/>
+                    <text font-size="24" font-family="'FontAwesome'" fill="#FFFFFF" transform="matrix(1 0 0 1 20.2852 34.2441)">&#xf10b;</text>
+                    </svg>
+                </div>
+                
+                
+                
+        </td>
+    </tr>
+    
+      
+  </tbody>
+</table>
+        
+    
+    <footer class="footer_inner">
+    <div class="copy-right">
+    <p>&copy; Forkourse All Rights Reserved</p>
+    </div>
+    </footer>
+
+
+  
+    </div>
+    
+    
+  </ion-content>
+</ion-view>

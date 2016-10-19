@@ -1,0 +1,262 @@
+
+    
+    <ion-modal-view>
+    <div class="cust_model">
+    <ion-content>
+    <div class="bar bar-header header_popup">
+        <div class="h1 title">Order Details</div>
+        <button class="button button-clear btn_close icon ion-close" ng-click="closeModal()"  style="margin-top: 25px!important;"></button>
+    </div>
+    <div class="content has-subheader" style="position:relative;" id="aaaaa-id">
+    
+    <div class="customer_detail">
+    
+    <div class="row_first">
+    
+    <div class="row cust_list">
+    <div class="col-34 name_lid">Customer</div>
+    <div class="col-66 name_field">{{orderdetails.first_name}} {{orderdetails.last_name}}</div>
+    </div>
+    
+    <div class="row cust_list" ng-show="orderdetails.order_type=='Delivery'">
+        <div class="col-34 name_lid">Delivery</div>
+        <div class="col-66 name_field color_red">{{orderdetails.delivery_time}}</div>
+    </div>
+    
+    <div class="row cust_list" ng-show="orderdetails.order_type=='Delivery'">
+        <div class="col-34 name_lid">Delivery Address</div>
+        <div class="col-66 name_field color_red">
+            <span ng-show="orderdetails.address">{{orderdetails.address}}<br /><br /></span>
+            <span ng-show="orderdetails.apartment">{{orderdetails.apartment}}<br /><br /></span>
+            <span ng-show="orderdetails.city">{{orderdetails.city}},</span>
+            <span ng-show="orderdetails.state">{{orderdetails.state}}&nbsp;</span>
+            <span ng-show="orderdetails.zipcode">{{orderdetails.zipcode}}</span>
+        </div>
+    </div>
+    
+    <div class="row cust_list" ng-show="orderdetails.notes">
+        <div class="col-34 name_lid">Delivery Notes</div>
+        <div class="col-66 name_field color_red">{{orderdetails.notes}}</div>
+    </div>
+    
+    <div class="row cust_list" ng-show="orderdetails.order_type=='Pickup'">
+        <div class="col-34 name_lid">Pickup</div>
+        <div class="col-66 name_field color_red">{{orderdetails.delivery_time}}</div>
+    </div>
+    
+    </div>
+    
+    <div class="row_hide" ng-show="details">
+        <div class="row cust_list">
+            <div class="col-34 name_lid">Tips</div>
+            <div class="col-66 name_field color_red">${{orderdetails.tip | number:2}}</div>
+        </div>
+        
+        <div class="row cust_list">
+            <div class="col-34 name_lid">Email</div>
+            <div class="col-66 name_fieldemail">{{orderdetails.email}}</div>
+        </div>
+        
+        <div class="row cust_list">
+            <div class="col-34 name_lid">Phone</div>
+            <div class="col-66 name_field"><a dir="ltr" href="tel:orderdetails.member_phone" x-apple-data-detectors="true" x-apple-data-detectors-type="telephone" x-apple-data-detectors-result="16/1">{{orderdetails.member_phone}}</a></div>
+        </div>
+    </div>
+    
+    <div class="row"  ng-hide="details">
+    	<button class="btn_show" ng-click="showDetails()"><i class=""></i></button>
+    </div>
+    
+    <div class="row"  ng-show="details">
+    	<button class="btn_hide" ng-click="hideDetails()"><i class=""></i></button>
+    </div>
+    
+    </div>
+    
+    <div class="order_detail">
+    
+    <div class="row table_head">
+        <div class="col-25">Dish</div>
+        <div class="col">Size</div>
+        <div class="col text-center">Qty</div>
+        <div class="col text-center">Price</div>
+        <div class="col text-right">Total</div>
+    </div>
+    
+    
+   <!-- <div class="row table_list"  ng-repeat="items in itemdetails">
+        <div class="col-25">{{items.item_name}}</div>
+        <div class="col"></div>
+        <div class="col text-center">{{items.quantity}}</div>
+        <div class="col text-center">${{items.unit_price}}</div>
+        <div class="col text-right">${{items.price}}</div>
+    </div>-->
+    
+    
+    
+    
+<div class="wp_detail" ng-repeat="items in itemdetails">
+    <div  class="table_list">
+        <div class="row">
+            <div class="col-25">{{items.item_name}}</div>
+            <div class="col">{{items.size}}</div>
+            <div class="col text-center">{{items.quantity}}</div>
+            <div class="col text-center">${{items.unit_price | number:2}}</div>
+        <div class="col text-right">${{items.price | number:2}}</div>
+    </div>
+    
+    <div class="side_wp" ng-repeat="sides in sidesdetails[items.ord_item_id]">
+        <h6 style="padding-bottom:12px; padding-left:5px;">{{sides.options}} :</h6>
+        <div class="row side_list" ng-repeat="sidelist in sides.sides">
+            <div class="col-66"><i class="fa fa-angle-double-right"></i>{{sidelist.sides}}</div>
+            <div class="col">+ ${{sidelist.price | number:2}}</div>
+        </div>
+        
+        </div>
+    </div>
+    <div class="side_wp" ng-show="items.instructions">
+        <h6 style="padding-bottom:12px; padding-left:5px;">Special Notes : {{items.instructions}}</h6>
+    </div>
+</div>    
+    
+    
+    <br>
+    <!--<div class="bottomborder"></div>-->
+    <div class="row total_list">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col-25">Subtotal</div>
+    <div class="col text-right">${{orderdetails.sub_total | number:2}}</div>
+    </div>
+    <div class="row total_list">
+        <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col-25">Discount</div>
+    <div class="col text-right">- ${{orderdetails.discount_amount | number:2}}</div>
+    </div>
+    <div class="row total_list">
+        <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col-25">Sales Tax</div>
+    <div class="col text-right">+ ${{orderdetails.tax_amount | number:2}}</div>
+    </div>
+    <div class="row total_list">
+        <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col-25">Tip</div>
+    <div class="col text-right">+ ${{orderdetails.tip | number:2}}</div>
+    </div>
+    
+    <div class="row sub_list">
+        <div class="col"></div>
+    	<div class="col"></div>
+    	<div class="col"></div>
+    	<div class="col-25">Total</div>
+    	<div class="col text-right">${{orderdetails.total_amount}}</div>
+    </div>
+    <div class="row sub_list" ng-show="orderdetails.refund_amount">
+        <div class="col"></div>
+    	<div class="col"></div>
+    	<div class="col"></div>
+    	<div class="col-25">Refund</div>
+    	<div class="col text-right">${{orderdetails.refund_amount}}</div>
+    </div>
+    
+    </div>
+    
+        
+    </div>
+    </ion-content>
+    
+    </div>
+    
+    
+    <div ng-show="orderdetails.order_status=='New'">
+    	<div ng-hide="accept" class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+            <button class="button-block btn_refund" ng-click="cancelOrder(orderid)">DECLINE</button>
+            </div>
+            <div class="col-50">
+            <button class="button-block btn_accept" ng-click="acceptOrder(orderid)">ACCEPT</button>
+            </div>
+        </div>
+        
+        <div ng-show="accept" class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+                <button class="button-block btn_refund" ng-click="printOrder(orderid)">PRINT</button>
+            </div>
+            <div class="col-50">
+            <button class="button-block btn_accept" ng-click="completeOrder(orderid)">COMPLETE</button>
+            </div>
+        </div>
+    </div>
+    
+    <div ng-show="orderdetails.order_status=='Accepted'">
+        <div class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+                <button class="button-block btn_refund" ng-click="printOrder(orderid)">PRINT</button>
+            </div>
+            <div class="col-50">
+            	<button class="button-block btn_accept" ng-click="completeOrder(orderid)">COMPLETE</button>
+            </div>
+        </div>
+    </div>
+    <div ng-show="orderdetails.order_status=='Completed'">
+        <div class="bar bar-footer bar_btnfooter" ng-hide="orderdetails.refund_amount">
+            <div class="col-50">
+            	<button class="button-block btn_accept" ng-click="showPopup(orderid)">REFUND</button>
+            </div>
+            <div class="col-50">
+            </div>
+        </div>
+    </div>
+    
+    
+    <!--<div ng-show="newpage">
+        <div ng-hide="accept" class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+            <button class="button-block btn_refund" ng-click="cancelOrder(orderid)">DECLINE</button>
+            </div>
+            <div class="col-50">
+            <button class="button-block btn_accept" ng-click="acceptOrder(orderid)">ACCEPT</button>
+            </div>
+        </div>
+        
+        <div ng-show="accept" class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+            </div>
+            <div class="col-50">
+            <button class="button-block btn_accept" ng-click="completeOrder(orderid)">COMPLETE</button>
+            </div>
+        </div>
+    </div>
+     
+   	<div ng-show="allpage">
+        <div ng-show="refund" class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+            	<button class="button-block btn_accept" ng-click="showPopup(orderid)">REFUND</button>
+            </div>
+            <div class="col-50">
+            </div>
+        </div>
+    </div>
+    
+    <div ng-show="acceptedpage">
+        <div class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+            </div>
+            <div class="col-50">
+            	<button class="button-block btn_accept" ng-click="completeOrder(orderid)">COMPLETE</button>
+            </div>
+        </div>
+    </div>-->
+    
+    
+    </ion-modal-view>
+    
+    
+    

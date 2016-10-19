@@ -1,0 +1,286 @@
+<meta name="format-detection" content="telephone=no">
+    
+    <ion-modal-view>
+    <div class="cust_premodel">
+    <ion-content  style="width:768px">
+    <!--div class="bar bar-header header_print_popup">
+        <div class="h1 title">Order Details</div>
+        <button class="button button-clear btn_close icon ion-close" ng-click="closeModal()" ng-show="false" style="margin-top: 25px!important;"></button>
+    </div-->
+    <div id="prevContent" class="content">
+    
+    <div id ="customer_predetail_id" class="customer_predetail">
+    
+    <div class="row_prefirst">
+    
+    <div class="row cust_prelist">
+        <div class="col-10 name_prelid">Customer:</div>
+        <div class="col-20 name_prefield">{{orderdetails.first_name}} {{orderdetails.last_name}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    
+    <div class="row cust_prelist" ng-show="orderdetails.order_type=='Delivery'">
+        <div class="col-10 name_prelid">Delivery:</div>
+        <div class="col-20 name_prefield">{{orderdetails.delivery_time}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    
+    <div class="row cust_prelist" ng-show="orderdetails.order_type=='Delivery'">
+        <div class="col-10 name_prelid">Delivery Address:</div>
+        <div class="col-20 name_prefield">
+            <span ng-show="orderdetails.address">{{orderdetails.address}}<br /><br /></span>
+            <span ng-show="orderdetails.apartment">{{orderdetails.apartment}}<br /><br /></span>
+            <span ng-show="orderdetails.city">{{orderdetails.city}},</span>
+            <span ng-show="orderdetails.state">{{orderdetails.state}}&nbsp;</span>
+            <span ng-show="orderdetails.zipcode">{{orderdetails.zipcode}}</span>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    
+    <div class="row cust_prelist" ng-show="orderdetails.notes">
+        <div class="col-10 name_prelid">Delivery Notes:</div>
+        <div class="col-20 name_prefield">{{orderdetails.notes}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    
+    <div class="row cust_prelist" ng-show="orderdetails.order_type=='Pickup'">
+        <div class="col-10 name_prelid">Pickup:</div>
+        <div class="col-20 name_prefield">{{orderdetails.delivery_time}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    </div>
+    
+    <div class="row_hide" ng-show="details">
+        
+    <div class="row cust_prelist">
+        <div class="col-10 name_prelid">Tips:</div>
+        <div class="col-20 name_prefield">${{orderdetails.tip | number:2}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+        
+    <div class="row cust_prelist">
+        <div class="col-10 name_prelid">Email:</div>
+        <div class="col-20 name_prefieldemail">{{orderdetails.email}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+        
+    <div class="row cust_prelist">
+        <div class="col-10 name_prelid">Phone:</div>
+        <div class="col-20 name_prefieldphone">{{orderdetails.member_phone}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    </div>
+    </div>
+    
+    <div id="order_predetail_id" class="order_predetail preview">
+    
+    <div class="row table_prehead">
+        <div class="col">Dish</div>
+        <div class="col prev-size">SIZE</div>
+        <div class="col text-center">Qty</div>
+        <div class="col prev-price text-center">Price</div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    
+    
+   <!-- <div class="row table_list"  ng-repeat="items in itemdetails">
+        <div class="col-25">{{items.item_name}}</div>
+        <div class="col"></div>
+        <div class="col text-center">{{items.quantity}}</div>
+        <div class="col text-center">${{items.unit_price}}</div>
+        <div class="col text-right">${{items.price}}</div>
+    </div>-->
+    
+    
+    
+    
+<div class="wp_predetail" ng-repeat="items in itemdetails">
+    <div  class="table_prelist">
+        <div class="row">
+            <div class="col">{{items.item_name}}</div>
+            <div class="col prev-size">{{items.size}}</div>
+            <div class="col text-center">{{items.quantity}}</div>
+            <div class="col prev-price text-center">${{items.unit_price | number:2}}</div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+
+        </div>
+    
+        <div class="side_prewp" ng-repeat="sides in sidesdetails[items.ord_item_id]">
+            <h6 style="padding-bottom:6px; padding-left:5px;">{{sides.options}} :</h6>
+            <div class="row side_prelist" ng-repeat="sidelist in sides.sides">
+                <div class="col"><i class="fa fa-angle-double-right"></i>{{sidelist.sides}}</div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col prev-size">+ ${{sidelist.price | number:2}}</div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"></div>
+
+            </div>
+        </div>
+        <div class="side_prewp" ng-show="items.instructions">
+            <h6 style="padding-bottom:12px; padding-left:5px;">Special Notes : {{items.instructions}}</h6>
+        </div>
+    </div>
+    
+</div>    
+
+    <!--<div class="bottomborder"></div>-->
+    <div class="row total_prelist">
+    <div class="col">Subtotal</div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col text-right">${{orderdetails.sub_total | number:2}}</div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+
+    </div>
+    <div class="row total_prelist">
+    <div class="col">Discount</div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col text-right">- ${{orderdetails.discount_amount | number:2}}</div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+
+    </div>
+    <div class="row total_prelist">
+    <div class="col">Sales Tax</div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col text-right">+ ${{orderdetails.tax_amount | number:2}}</div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+
+    </div>
+    <div class="row total_prelist">
+    <div class="col">Tip</div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col text-right">+ ${{orderdetails.tip | number:2}}</div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+
+    </div>
+    
+    <div class="row sub_prelist">
+    	<div class="col">Total</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    	<div class="col text-right">${{orderdetails.total_amount}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+
+    </div>
+    <div class="row sub_prelist" ng-show="orderdetails.refund_amount">
+        <div class="col">Refund</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    	<div class="col text-right">${{orderdetails.refund_amount}}</div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+
+    </div>
+    
+    </div>
+    
+        
+    </div>
+    </ion-content>
+    
+    </div>
+    <!--<div ng-show="newpage">
+        <div ng-hide="accept" class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+            <button class="button-block btn_refund" ng-click="cancelOrder(orderid)">DECLINE</button>
+            </div>
+            <div class="col-50">
+            <button class="button-block btn_accept" ng-click="acceptOrder(orderid)">ACCEPT</button>
+            </div>
+        </div>
+        
+        <div ng-show="accept" class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+            </div>
+            <div class="col-50">
+            <button class="button-block btn_accept" ng-click="completeOrder(orderid)">COMPLETE</button>
+            </div>
+        </div>
+    </div>
+     
+   	<div ng-show="allpage">
+        <div ng-show="refund" class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+            	<button class="button-block btn_accept" ng-click="showPopup(orderid)">REFUND</button>
+            </div>
+            <div class="col-50">
+            </div>
+        </div>
+    </div>
+    
+    <div ng-show="acceptedpage">
+        <div class="bar bar-footer bar_btnfooter">
+            <div class="col-50">
+            </div>
+            <div class="col-50">
+            	<button class="button-block btn_accept" ng-click="completeOrder(orderid)">COMPLETE</button>
+            </div>
+        </div>
+    </div>-->
+    
+    
+    </ion-modal-view>
+    
+    
+    
